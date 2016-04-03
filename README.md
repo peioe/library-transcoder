@@ -34,9 +34,11 @@ Options:
 - Transcode to ogg
 
 ### Todo:
-- Help message with version
-- Option for the number of processes. Default to number of CPUs.
-- Transcode flac to target format/bitrate.
+[] Help message with version
+[] Option for the number of processes. Default to number of CPUs.
+[] Transcode flac to target format/bitrate.
 
 ### Transcoding features:
-- transcode to AAC
+[] Transcode to MP3
+[] Transcode to AAC
+
