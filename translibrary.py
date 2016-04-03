@@ -15,9 +15,11 @@ copy_extensions = ['mp3', 'ogg', 'm4a', 'mpc', 'txt']
 transcode_extensions = ['flac', 'wav', 'ape', 'alac']
 
 # Transcoding options
-lame_options = "-V0"
+default_lame_options = "-V0"
 ogg_options = "-q8"
 
+# mp3 multiple values separator
+mp3_sep = " & "
 
 parser = OptionParser(usage="usage: %prog [options] source_dir target_dir")
 
@@ -67,13 +69,56 @@ def transcode_ogg(source_file, target_file):
     command = "oggenc %s -Q -o %s %s" % (ogg_options, add_quotes_to_path(target_file), add_quotes_to_path(source_file))
     return os.system(command)
 
+def build_lame_cmd(tags_dict):
+    global default_lame_options
+    lame_options = default_lame_options
+    if "title" in tags_dict:
+        lame_options += " --tt '"+tags_dict['title'].replace("'", "\'")+"'"
+    if "artist" in tags_dict:
+        lame_options += " --ta '"+tags_dict['artist'].replace('"', '\"')+"'"
+    if "tracknumber" in tags_dict:
+        lame_options += " --tn '"+tags_dict['tracknumber'].replace('"', '\"')+"'"
+    if "genre" in tags_dict:
+        lame_options += " --tg '"+tags_dict['genre'].replace('"', '\"')+"'"
+    if "date" in tags_dict:
+        lame_options += " --ty '"+tags_dict['date'].replace('"', '\"')+"'"
+    if "album" in tags_dict:
+        lame_options += " --tl '"+tags_dict['album'].replace('"', '\"')+"'"
+    if "albumartist" in tags_dict:
+        lame_options += " --tv TPE2='"+tags_dict['albumartist'].replace('"', '\"')+"'"
+    return lame_options
+
+def transcode_mp3(source_file, target_file):
+    vorbis_tags = os.popen("metaflac --export-tags-to=- %s" % add_quotes_to_path(source_file))
+    tags_dict = {}
+    for vorbis in vorbis_tags:
+        tag, value = vorbis.split("=", 1)
+        tag = tag.lower()
+        if tag in tags_dict:
+            tags_dict[tag] = tags_dict[tag]+mp3_sep+value.replace("\n", "")
+        else:
+            tags_dict[tag] = value.replace("\n", "")
+#    lame_options += "--tt %(Title)s " \
+#     "--tn %(TRACKNUMBER)s " \
+#     "--tg %(Genre)s "\
+#     "--ty %(DATE)s "\
+#     "--ta %(Artist)s " \
+#     "--tl %(Album)s " \
+#     "--tv TPE2=%(ALBUMARTIST)s " % tags_dict
+#     "--tv TPOS=%(DISCNUMBER)s/%(TOTALDISCS)s " \
+#     "--tv TCOM=%(COMPOSER)s " 
+    command = "flac -cd %s | lame %s - %s" % (add_quotes_to_path(source_file), build_lame_cmd(tags_dict), add_quotes_to_path(target_file))
+    print command
+    return os.system(command)
+
+
 def process_file(source_file):
     global files_transcoded, files_skipped
     target_file = file.replace(source_topdir, destination_topdir)
     target_file = os.path.splitext(target_file)[0]+"."+options.format.lower()
     if not(os.path.isfile(target_file)) or (os.path.isfile(target_file) and os.path.getmtime(source_file) > os.path.getmtime(target_file)):
         if options.format == "mp3":
-            print "mp3"
+            transcode_mp3(source_file, target_file)
         elif options.format == "ogg":
             if not(transcode_ogg(source_file, target_file)):
                 files_transcoded += 1
@@ -132,3 +177,6 @@ if options.verbose:
     print "%d directories created. %d directories already existing." % (dirs_created, dirs_skipped)
     print "%d covers copied. %d covers already existing." % (covers_copied, covers_skipped)
     print "Copied %d files. Transcoded %d files. Skipped %d files. Updated %d files." % (files_copied, files_transcoded, files_skipped, files_updated)
+
+#test_file = "/mnt/4TB/music/tests/source/01.flac"
+#process_file(test_file)
