@@ -20,26 +20,23 @@ Options:
 ## Features and todo-list
 
 ### Done
--* Copy directory structure from source to dest
--* Whitelist of file extensions to keep and copy.
--* Copy existing mp3, ogg, mpc from source to dest
--* Copy cover.jpg or other specific filenames
--* Reprocess files when more recent than destination.
--* number of skipped copies, transcodes, etc
--* Skip existing mp3/other files from copy.
--* Option for target formats (mp3, ogg)
+- Copy directory structure from source to dest
+- Whitelist of file extensions to keep and copy.
+- Copy existing mp3, ogg, mpc from source to dest
+- Copy cover.jpg or other specific filenames
+- Reprocess files when more recent than destination.
+- number of skipped copies, transcodes, etc
+- Skip existing mp3/other files from copy.
+- Option for target formats (mp3, ogg)
 
-*
-** Transcoding features
--* Option to downsample to 44.1kHz when transcoding.
--* Transcode to ogg
+#### Transcoding features
+- Option to downsample to 44.1kHz when transcoding.
+- Transcode to ogg
 
+### Todo:
+- Help message with version
+- Option for the number of processes. Default to number of CPUs.
+- Transcode flac to target format/bitrate.
 
-
-** Todo:
--* Help message with version
--* Option for the number of processes. Default to number of CPUs.
--* Transcode flac to target format/bitrate.
-
-** Transcoding features:
--* transcode to AAC
+### Transcoding features:
+- transcode to AAC
