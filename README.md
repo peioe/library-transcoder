@@ -8,6 +8,7 @@ translibrary.py [options] source_dir target_dir
 
 Options:
 > -h, --help  show this help message and exit
+
 > -v, --verbose print status messages to stdout
 
 > -m, --multiprocess  use multiprocessing to transcode the files (default is false)
