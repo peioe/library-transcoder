@@ -18,13 +18,12 @@ Options:
 > -r, --resample  resample file to 44.1kHz when transcoding
 
 ## Features and todo-list
-
 ### Done
-- [x] Copy directory structure from source to destination.
+- [x] Copy directory structure from source to target.
 - [x] Whitelist of file extensions to keep and copy.
-- [x] Copy existing mp3, ogg, mpc from source to destination.
+- [x] Copy existing mp3, ogg, mpc from source to target.
 - [x] Copy cover.jpg or other specific filenames.
-- [x] Reprocess files when more recent than destination.
+- [x] Reprocess files when more recent than target.
 - [x] number of skipped copies, transcodes, etc.
 - [x] Skip existing mp3/other files from copy.
 - [x] Option for target formats (mp3, ogg)
@@ -34,8 +33,7 @@ Options:
 - [x] Transcode to ogg
 
 ### Todo:
-- [ ] Help message with version
-- [ ] Option for the number of processes. Default to number of CPUs.
+- [ ] Multithreading for transcoding.
 - [ ] Transcode flac to target format/bitrate.
 
 ### Transcoding features:
