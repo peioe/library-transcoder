@@ -1,6 +1,5 @@
 # library-transcoder
 Library transcoder is a simple python script that will "sync" a lossless version of your music library to a lossy version. It will copy files you tell it to copy (mp3, ogg, covers, any pre-determined .ext files etc) and transcode the files you want to transcode (flac, wav, etc) to the format you want to have your lossy library in (mp3, ogg, aac).
-
 It's not done so don't get it just yet :p
 
 ## Usage
