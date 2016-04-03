@@ -8,7 +8,6 @@ translibrary.py [options] source_dir target_dir
 
 Options:
 > -h, --help  show this help message and exit
-
 > -v, --verbose print status messages to stdout
 
 > -m, --multiprocess  use multiprocessing to transcode the files (default is false)
@@ -20,12 +19,12 @@ Options:
 ## Features and todo-list
 
 ### Done
-- [x] Copy directory structure from source to dest
+- [x] Copy directory structure from source to destination.
 - [x] Whitelist of file extensions to keep and copy.
-- [x] Copy existing mp3, ogg, mpc from source to dest
-- [x] Copy cover.jpg or other specific filenames
+- [x] Copy existing mp3, ogg, mpc from source to destination.
+- [x] Copy cover.jpg or other specific filenames.
 - [x] Reprocess files when more recent than destination.
-- [x] number of skipped copies, transcodes, etc
+- [x] number of skipped copies, transcodes, etc.
 - [x] Skip existing mp3/other files from copy.
 - [x] Option for target formats (mp3, ogg)
 
