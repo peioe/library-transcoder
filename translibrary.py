@@ -105,8 +105,10 @@ def transcode_mp3(source_file, target_file):
             tags_dict[tag] = tags_dict[tag]+mp3_sep+value.replace("\n", "")
         else:
             tags_dict[tag] = value.replace("\n", "")
-    command = "flac -cd %s | lame %s - %s" % (shellquote(source_file), build_lame_cmd(tags_dict), shellquote(target_file))
-    print "%r" % command
+    if options.resample:
+        resample = "--resample 44.1"
+    command = "flac -cd %s | lame %s %s - %s" % (shellquote(source_file), resample, build_lame_cmd(tags_dict), shellquote(target_file))
+    print command
     if not(os.system(command)):
         files_transcoded += 1
     else:

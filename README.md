@@ -22,7 +22,6 @@ See at the top of the scripts for variables that can be changed.
 
 ### Transcoding features:
 - [ ] Transcode to AAC
-- [ ] Resampling when transcoding to MP3
 
 ### Done
 - [x] Copy directory structure from source to target.
@@ -39,4 +38,6 @@ See at the top of the scripts for variables that can be changed.
 - [x] Transcode to OGG
 - [x] Resampling when transcoding to OGG
 - [x] Transcode to MP3 (default)
+- [x] Resampling when transcoding to MP3
+
 
