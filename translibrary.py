@@ -49,6 +49,7 @@ files_copied = 0
 files_updated = 0
 files_skipped = 0
 files_transcoded = 0
+transcode_error = 0
 
 transcode_source_files = []
 
@@ -83,7 +84,7 @@ def build_lame_cmd(tags_dict):
     return lame_options
 
 def transcode_ogg(source_file, target_file):
-    global ogg_options, files_transcoded
+    global ogg_options, files_transcoded, transcode_error
     if options.resample:
         ogg_options += " --resample 44100"
     command = "oggenc %s -Q -o %s %s" % (ogg_options, shellquote(target_file), shellquote(source_file))
@@ -91,9 +92,10 @@ def transcode_ogg(source_file, target_file):
         files_transcoded += 1
     else:
         print "Error during transcoding to ogg. source: %s -- dest: %s" % (source_file, target_file)
+        transcode_error += 1
 
 def transcode_mp3(source_file, target_file):
-    global files_transcoded
+    global files_transcoded, transcode_error
     vorbis_tags = os.popen("metaflac --export-tags-to=- %s" % shellquote(source_file))
     tags_dict = {}
     for vorbis in vorbis_tags:
@@ -109,6 +111,7 @@ def transcode_mp3(source_file, target_file):
         files_transcoded += 1
     else:
         print "Error during transcoding to mp3. source: %s -- dest: %s" % (source_file, target_file)
+        transcode_error += 1
 
 def process_file(source_file):
     global files_transcoded, files_skipped
@@ -170,7 +173,5 @@ for file in transcode_source_files:
 if options.verbose:
     print "%d directories created. %d directories already existing." % (dirs_created, dirs_skipped)
     print "%d covers copied. %d covers already existing." % (covers_copied, covers_skipped)
-    print "Copied %d files. Transcoded %d files. Skipped %d files. Updated %d files." % (files_copied, files_transcoded, files_skipped, files_updated)
-
-#test_file = "/mnt/4TB/music/tests/source/01.flac"
-#process_file(test_file)
+    print "Copied %d files. Transcoded %d files. Updated %d files. Skipped %d files." % (files_copied, files_transcoded, files_updated, files_skipped)
+    print "%d transcode errors." % transcode_error
