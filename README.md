@@ -19,11 +19,10 @@ See at the top of the scripts for variables that can be changed.
 ## Features and todo-list
 ### Todo:
 - [ ] Multithreading for transcoding.
-- [ ] Transcode flac to target format/bitrate.
 
 ### Transcoding features:
 - [ ] Transcode to AAC
-- [x] Resampling when transcoding to MP3
+- [ ] Resampling when transcoding to MP3
 
 ### Done
 - [x] Copy directory structure from source to target.
