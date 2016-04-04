@@ -6,16 +6,25 @@ It's not done so don't get it just yet :p
 > python 2.7, oggenc, flac, metaflac
 
 ## Usage
-translibrary.py [options] source_dir target_dir
+**translibrary.py [options] source_dir target_dir**
 
 Options:
 > -h, --help  show this help message and exit<br />
-> -v, --verbose print status messages to stdout<br />
+> -f FORMAT, --format=FORMAT  transcode to mp3 or ogg (default is mp3)<br />
 > -m, --multiprocess  use multiprocessing to transcode the files (default is false)<br />
-> -f FORMAT, --format=FORMAT  transcode to mp3 or ogg (default is ogg)<br />
 > -r, --resample  resample file to 44.1kHz when transcoding<br />
+> -v, --verbose print status messages to stdout<br />
+See at the top of the scripts for variables that can be changed.
 
 ## Features and todo-list
+### Todo:
+- [ ] Multithreading for transcoding.
+- [ ] Transcode flac to target format/bitrate.
+
+### Transcoding features:
+- [ ] Transcode to AAC
+- [x] Resampling when transcoding to MP3
+
 ### Done
 - [x] Copy directory structure from source to target.
 - [x] Whitelist of file extensions to keep and copy.
@@ -28,13 +37,7 @@ Options:
 
 #### Transcoding features
 - [x] Option to downsample to 44.1kHz when transcoding.
-- [x] Transcode to ogg
-
-### Todo:
-- [ ] Multithreading for transcoding.
-- [ ] Transcode flac to target format/bitrate.
-
-### Transcoding features:
-- [ ] Transcode to MP3
-- [ ] Transcode to AAC
+- [x] Transcode to OGG
+- [x] Resampling when transcoding to OGG
+- [x] Transcode to MP3 (default)
 
